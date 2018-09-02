@@ -14,3 +14,7 @@ services:
       # will pick node_modules from the image otherwise it would be overwritten
       - .:/src
       - /src/node_modules
+    ports: 
+      - "9229:9229"
+  
+  
