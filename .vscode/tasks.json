@@ -4,11 +4,15 @@
     "version": "0.1.0",
     "command": "docker-compose",
     "isShellCommand": true,
+    "args": [
+        "run",
+        "--rm",
+        "helix"
+    ],
     "tasks": [
         {            
             "taskName": "Test",
             "suppressTaskName": true,
-            "args": [ "run", "--rm", "helix" ],
             "isBuildCommand": false,
             "isBackground": false,
             "problemMatcher": [
@@ -17,6 +21,33 @@
                 "$jshint"
             ],
             "isTestCommand": true
+        },
+        {
+            "taskName": "Lint",
+            "suppressTaskName": true,
+            "args": [
+                "run",
+                "lint"
+            ],
+            "problemMatcher": {
+                "owner": "javascript",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": [
+                    {
+                        "regexp": "^\\/src\\/([^\\s].*)$",
+                        "file": 1
+                    },
+                    {
+                        "regexp": "^\\s+(\\d+):(\\d+)\\s+(error|warning|info)\\s+(.*)\\s\\s+(.*)$",
+                        "line": 1,
+                        "column": 2,
+                        "severity": 3,
+                        "message": 4,
+                        "code": 5,
+                        "loop": true
+                    }
+                ]
+            }
         }
     ]
 }

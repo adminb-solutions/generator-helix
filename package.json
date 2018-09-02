@@ -4,6 +4,7 @@
   "description": "yeoman generator for Helix style Sitecore projects",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
     "test": "mocha && eslint .",
     "test-debug": "mocha --inspect-brk=0.0.0.0:9229 --no-timeouts --colors"
   },
