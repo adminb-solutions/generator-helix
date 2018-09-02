@@ -141,9 +141,9 @@ module.exports = class extends yeoman {
 					path.join(
 						this.settings.ProjectPath,
 						this.settings.LayerPrefixedProjectName + '.csproj')
-					),
-					this.templatedata
-				);
+				),
+				this.templatedata
+			);
 		} else {
 			this.fs.copyTpl(
 				this.templatePath('_project.csproj'),
@@ -151,8 +151,9 @@ module.exports = class extends yeoman {
 					path.join(
 						this.settings.ProjectPath,
 						this.settings.LayerPrefixedProjectName + '.csproj')
-					),
-					this.templatedata);
+				),
+				this.templatedata
+			);
 		}
 		this.fs.copyTpl(
 			this.templatePath('Properties/AssemblyInfo.cs'),
@@ -160,11 +161,11 @@ module.exports = class extends yeoman {
 				path.join(
 					this.settings.ProjectPath,
 					'/Properties/AssemblyInfo.cs')
-				),
-				this.templatedata
-			);
+			),
+			this.templatedata
+		);
 
-			//if we have publishsettings.targets, then copy in PublishProfiles/local.pubxml
+		//if we have publishsettings.targets, then copy in PublishProfiles/local.pubxml
 		fs.access(this.destinationPath('publishsettings.targets'), fs.constants.R_OK, (err) => {
 			if(err === null){
 				this.fs.copyTpl(
