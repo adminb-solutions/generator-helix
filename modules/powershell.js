@@ -6,27 +6,25 @@ class Powershell {
 	}
 
 	runAsync(pathToScriptFile, parameters) {
-		const cmdline = pathToScriptFile
+		const cmdline = pathToScriptFile;
+		
 		console.log('Powershell - running: ' + cmdline + ' ' + parameters);
-		var spawn = require('child_process').spawn;
-		var child = spawn('pwsh -c ', [cmdline, parameters]);
 
-		child.stdout.setEncoding('utf8');
-		child.stderr.setEncoding('utf8');
+		const PowerShell = require('powershell');
+		let child = new PowerShell(cmdline + ' ' + parameters,{PSCore:true});
 
-		child.stdout.on('data', function (data) {
+		child.on('output', function (data) {
 			console.log(data);
 		});
 
-		child.stderr.on('data', function (data) {
+		child.on('error', function (data) {
 			console.error('Error: ' + data);
 		});
 
-		child.on('exit', function () {
+		child.on('end', function () {
 			console.log('Powershell - done running ' + pathToScriptFile + parameters);
 		});
 
-		child.stdin.end();
 	}
 }
 
