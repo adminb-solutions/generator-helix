@@ -1,0 +1,16 @@
+version: '3.5'
+
+services:
+  helix:
+    build: 
+      context: .
+      target: install
+      args:
+        NODE_ENV: development
+    image: local/helix:dev
+    entrypoint: [ "npm" ]
+    command: [ "test" ]
+    volumes: 
+      # will pick node_modules from the image otherwise it would be overwritten
+      - .:/src
+      - /src/node_modules
