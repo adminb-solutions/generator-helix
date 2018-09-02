@@ -1,22 +1,22 @@
 const chalk = require('chalk');
 
 function getTargets() {
-return [{
-	name: '.net 4.7',
-	value: 'v4.7'
-}, {
-	name: '.net 4.6.2',
-	value: 'v4.6.2'
-}, {
-	name: '.net 4.6.1',
-	value: 'v4.6.1'
-}, {
-	name: '.net 4.6',
-	value: 'v4.6'
-}, {
-	name: '.net 4.5.2',
-	value: 'v4.5.2'
-}];
+	return [{
+		name: '.net 4.7',
+		value: 'v4.7'
+	}, {
+		name: '.net 4.6.2',
+		value: 'v4.6.2'
+	}, {
+		name: '.net 4.6.1',
+		value: 'v4.6.1'
+	}, {
+		name: '.net 4.6',
+		value: 'v4.6'
+	}, {
+		name: '.net 4.5.2',
+		value: 'v4.5.2'
+	}];
 }
 
 function validateRequired(input, msg) {
