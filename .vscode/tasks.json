@@ -1,0 +1,22 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "command": "docker-compose",
+    "isShellCommand": true,
+    "tasks": [
+        {            
+            "taskName": "Test",
+            "suppressTaskName": true,
+            "args": [ "run", "--rm", "helix" ],
+            "isBuildCommand": false,
+            "isBackground": false,
+            "problemMatcher": [
+                "$lessCompile",
+                "$tsc",
+                "$jshint"
+            ],
+            "isTestCommand": true
+        }
+    ]
+}
