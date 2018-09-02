@@ -126,7 +126,7 @@ module.exports = class extends yeoman {
 			var destinationDirectory = path.join(this.settings.sourceFolder,layers[i]);
 			mkdir.sync(destinationDirectory);
 
-			var layer = layers[i];
+			var layer = layers[i].toLowerCase();
 			var layerDocumentationFileName = layer + '/' + layer + '-layer.md';
 			var destinationFileName = path.join(this.destinationPath(destinationDirectory), layer + '-layer.md');
 			this.fs.copy(this.templatePath(layerDocumentationFileName),this.destinationPath(destinationFileName));
