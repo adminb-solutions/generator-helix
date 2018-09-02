@@ -9,9 +9,10 @@ describe('yo helix:add modulegroup', function () {
 
 	it('Can add on a emptyhelix solution with modulegroup', function checkFiles (done) {
 		helpers.run(path.join(__dirname, '../generators/add'))
-			.inTmpDir(function () {
+			.inDir('/tmp/tests',function () {
 				var doneParent = this.async(); // `this` is the RunContext object.
 				helpers.run(path.join(__dirname, '../generators/app'))
+					.inDir('/tmp/tests')
 					.withPrompts({
 						SolutionType: 'emptyhelix',
 						SolutionName: 'UnitTest',
@@ -40,9 +41,10 @@ describe('yo helix:add modulegroup', function () {
 		// This test might seem unnecessary. But when you run the code normally an empty value from the prompt is an empty string,
 		// but in a test context it's 'undefined'
 		helpers.run(path.join(__dirname, '../generators/add'))
-			.inTmpDir(function () {
+			.inDir('/tmp/tests',function () {
 				var doneParent = this.async(); // `this` is the RunContext object.
 				helpers.run(path.join(__dirname, '../generators/app'))
+					.inDir('/tmp/tests')
 					.withPrompts({
 						SolutionType: 'pentiahelix',
 						SolutionName: 'UnitTest',

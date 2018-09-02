@@ -14,6 +14,7 @@ describe('yo helix:app (emptyhelix)', function () {
 
 	it('creates expected files', function checkFiles (done) {
 		helpers.run(path.join(__dirname, '../generators/app'))
+			.inDir('/tmp/tests')
 			.withPrompts({
 				SolutionType: 'emptyhelix',
 				SolutionName: 'UnitTest',
