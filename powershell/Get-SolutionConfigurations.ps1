@@ -1,4 +1,3 @@
-. $PSScriptRoot\Get-MSBuildPath.ps1 
 
 Function Get-SolutionConfigurations {
     [CmdletBinding()]
@@ -6,9 +5,19 @@ Function Get-SolutionConfigurations {
     [Parameter(Mandatory=$true)]
     [string]$SolutionFile)
 
-    $msbuildPath = Get-MSBuildPath
-    Add-Type -Path "$msbuildPath\Microsoft.Build.dll"
-    $solution = [Microsoft.Build.Construction.SolutionFile]::Parse($SolutionFile)
-    $solution.SolutionConfigurations
+    $SolutionConfigurationPattern = @"
+(?x)
+^[^=]+ = \s* (?<configuration> \w+  \| .+)
+"@
+
+    $set = New-Object System.Collections.Generic.HashSet[string]
+
+    Get-Content -Path $SolutionFile |
+        ForEach-Object {
+            if ($_ -match $SolutionConfigurationPattern) {
+                $set.Add($Matches['configuration']) | Out-Null
+            }
+        }
+    $set
 }
 

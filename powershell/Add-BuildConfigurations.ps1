@@ -9,7 +9,7 @@ Function Add-BuildConfigurations {
     $propertyGroupCondition = "</PropertyGroup>" 
     foreach ($configuration in $Configurations)
     {    
-        $configurationToAdd = $configuration.FullName.Replace(" ","")
+        $configurationToAdd = $configuration.Replace(" ","")
         $addProjectBuildConfiguration = @("  <PropertyGroup Condition=`"'`$(Configuration)|`$(Platform)' == '$configurationToAdd'`">",
                                   "`t<DebugSymbols>true</DebugSymbols>",
                                   "`t<OutputPath>bin\</OutputPath>",

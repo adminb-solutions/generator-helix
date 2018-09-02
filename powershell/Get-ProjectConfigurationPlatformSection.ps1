@@ -10,8 +10,8 @@ Function Get-ProjectConfigurationPlatformSection {
 
     foreach($configuration in $Configurations)
     {
-        $fullName = $configuration.FullName
-        if($configuration.Name -eq "Debug")
+        $fullName = $configuration
+        if($configuration -like "Debug|*")
         {
             $buildInherit = "Debug|Any CPU";
         }
