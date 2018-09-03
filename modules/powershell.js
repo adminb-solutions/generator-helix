@@ -5,7 +5,7 @@ class Powershell {
 	constructor() {
 	}
 
-	runAsync(pathToScriptFile, parameters) {
+	runAsync(pathToScriptFile, parameters,done) {
 		const cmdline = pathToScriptFile;
 		
 		console.log('Powershell - running: ' + cmdline + ' ' + parameters);
@@ -23,6 +23,7 @@ class Powershell {
 
 		child.on('end', function () {
 			console.log('Powershell - done running ' + pathToScriptFile + parameters);
+			done();
 		});
 
 	}

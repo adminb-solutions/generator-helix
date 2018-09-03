@@ -32,7 +32,7 @@ describe('yo helix:add', function () {
 			}).then(() => {
 
 				assert.file([
-					'./src/Feature/AddedProjectFeatureName/code/Feature.AddedProjectFeatureName.csproj'
+					'./src/Feature/AddedProjectFeatureName/src/Feature.AddedProjectFeatureName.csproj'
 				]);
 
 				done();
@@ -60,12 +60,12 @@ describe('yo helix:add', function () {
 			}).then(() => {
 
 				assert.file([
-					'./src/Feature/AddedProjectFeatureName/code/Feature.AddedProjectFeatureName.csproj',
-					'./src/Feature/AddedProjectFeatureName/code/App_Config/Include/Feature.AddedProjectFeatureName/serialization.config'
+					'./src/Feature/AddedProjectFeatureName/src/Feature.AddedProjectFeatureName.csproj',
+					'./src/Feature/AddedProjectFeatureName/src/App_Config/Include/Feature.AddedProjectFeatureName/serialization.config'
 				]);
 
 				assert.fileContent([
-					['./src/Feature/AddedProjectFeatureName/code/App_Config/Include/Feature.AddedProjectFeatureName/serialization.config', /physicalRootPath="\$\(featureFolder\)\\AddedProjectFeatureName\\\$\(configurationFolder\)"/]
+					['./src/Feature/AddedProjectFeatureName/src/App_Config/Include/Feature.AddedProjectFeatureName/serialization.config', /physicalRootPath="\$\(featureFolder\)\\AddedProjectFeatureName\\\$\(configurationFolder\)"/]
 				]);
 
 				done();
@@ -93,7 +93,7 @@ describe('yo helix:add', function () {
 			}).then(() => {
 
 				assert.file([
-					'./src/Feature/AddedProjectFeatureName/code/Acme.Feature.AddedProjectFeatureName.csproj'
+					'./src/Feature/AddedProjectFeatureName/src/Acme.Feature.AddedProjectFeatureName.csproj'
 				]);
 
 				done();
@@ -122,11 +122,12 @@ describe('yo helix:add', function () {
 				VendorPrefix: '',
 				layer: 'Feature'
 			}).then(() => {
-
-				assert.file([
-					'./src/Feature/AddedProjectFeatureName/code/Feature.AddedProjectFeatureName.csproj'
+				let projFile = './src/Feature/AddedProjectFeatureName/src/Feature.AddedProjectFeatureName.csproj';
+				let slnFile = './UnitTest.sln';
+				assert.fileContent([
+					[projFile,'<?xml version="1.0" encoding="utf-8"?>'],
+					[slnFile,'Microsoft Visual Studio Solution File, Format Version 12.00'],
 				]);
-
 				done();
 			});
 	});

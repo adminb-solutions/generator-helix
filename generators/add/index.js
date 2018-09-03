@@ -212,7 +212,7 @@ module.exports = class extends yeoman {
 	}
 
 	writing() {
-		this.settings.ProjectPath = path.join(this.settings.sourceFolder, this.layer, this.modulegroup, this.settings.ProjectName, 'code' );
+		this.settings.ProjectPath = path.join(this.settings.sourceFolder, this.layer, this.modulegroup, this.settings.ProjectName, this.settings.sourceFolder );
 		this._copyProjectItems();
 
 		if(this.settings.serialization) {
@@ -223,17 +223,21 @@ module.exports = class extends yeoman {
 			this._copySolutionSpecificItems();
 		}
 
-		const files = fs.readdirSync(this.destinationPath());
-		const SolutionFile = files.find(file => file.indexOf('.sln') > -1);
-		const scriptParameters = '-SolutionFile \'' + this.destinationPath(SolutionFile) + '\' -Name ' + this.settings.LayerPrefixedProjectName + ' -Type ' + this.layer + ' -ProjectPath \'' + this.settings.ProjectPath + '\'' + ' -SolutionFolderName ' + this.templatedata.projectname;
+		
 
-		var pathToAddProjectScript = path.join(this._sourceRoot, '../../../powershell/Add-Project.ps1');
-		powershell.runAsync(pathToAddProjectScript, scriptParameters);
 	}
 
 	end() {
 		if(fs.existsSync(this.destinationPath('helix-template/_project.csproj'))){
 			this._renameProjectFile();
 		}
+		
+		const files = fs.readdirSync(this.destinationPath());
+		const SolutionFile = files.find(file => file.indexOf('.sln') > -1);
+		const scriptParameters = '-SolutionFile \'' + this.destinationPath(SolutionFile) + '\' -Name ' + this.settings.LayerPrefixedProjectName + ' -Type ' + this.layer + ' -ProjectPath \'' + this.settings.ProjectPath + '\'' + ' -SolutionFolderName ' + this.templatedata.projectname;
+
+		var pathToAddProjectScript = path.join(this._sourceRoot, '../../../powershell/Add-Project.ps1');
+		let done = this.async();
+		powershell.runAsync(pathToAddProjectScript, scriptParameters,done);
 	}
 };

@@ -29,7 +29,7 @@ describe('yo helix:add modulegroup', function () {
 			}).then(() => {
 
 				assert.file([
-					'./src/Feature/Login/AddedProjectFeatureName/code/Acme.Feature.AddedProjectFeatureName.csproj'
+					'./src/Feature/Login/AddedProjectFeatureName/src/Acme.Feature.AddedProjectFeatureName.csproj'
 				]);
 
 				done();
@@ -61,7 +61,7 @@ describe('yo helix:add modulegroup', function () {
 			}).then(() => {
 
 				assert.file([
-					'./src/Feature/Login/AddedProjectFeatureName/code/Feature.AddedProjectFeatureName.csproj'
+					'./src/Feature/Login/AddedProjectFeatureName/src/Feature.AddedProjectFeatureName.csproj'
 				]);
 
 				done();
