@@ -5,17 +5,50 @@
 [![Dependency Status](https://img.shields.io/david/PentiaLabs/generator-helix.svg?style=flat-square)](https://david-dm.org/PentiaLabs/generator-helix)
 [![License](https://img.shields.io/npm/l/generator-helix.svg?style=flat-square)](https://github.com/PentiaLabs/generator-helix//blob/master/LICENSE)
 
-
 This generator will create a Helix compliant solution and provide the ability to create & add new projects to any layer (i.e. Feature, Foundation & Project). Unicorn is used for serialization, if you don't use serialization and or TDS you have the option not to add serialization to the project.
 
-## Prerequisites:
+## Getting started using Docker
 
-- **VS 2015 or earlier**   
-If you want to run the generator with only Visual Studio 2017 installed, you need the [Microsoft Build Tools 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48159) as well. For more information see issue #109 and #107
+You can develop the application using **Docker** so you don't require any other dependencies. To start development you can do ```docker-compose build```.
+
+You can then use the defined Visual Studio tasks:
+
+- Test task - runs unit tests and linting.
+- Lint task - only runs linting (but not tests). Shows any problems in the Visual Studio Code problems window.
+
+The following launch definitions are also available:
+
+- Debug tests - starts the tests and attaches the debugger.
+- Attach tests - if the tests have been already started, it will attach the debugger.
+
+In order to build an image to be able to run the generator you should run:
+
+```bash
+docker build -t <image-tag> .
+```
+
+Then the image can be used as follows:
+
+```bash
+docker run --rm -ti -v <path-to-output-folder>:/generated <image-tag>
+```
+
+```<path-to-output-folder>``` is the local path where the generator should create the files. For the current folder (when using powershell) do ```${PWD}```
+
+To run the project subgenerator use:
+
+```bash
+docker run --rm -ti -v <path-to-output-folder>:/generated <image-tag> helix:add
+```
+
+## Getting started with bare-metal installation
+
+### Prerequisites:
+
 - **NPM 3.x or newer** (see installed version by running `npm -v` in PowerShell)
 - **NODE 6.x or newer** (see installed version by running `node -v` in PowerShell)
 
-## Getting started
+### Usage
 
 You need Yeoman (See [here](http://yeoman.io/)) . Yo and the generators used are installed using [npm]( https://www.npmjs.com/).
 
