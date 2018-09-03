@@ -8,17 +8,20 @@ Function Add-Line {
     [Parameter(Mandatory=$true)]
     [string[]]$LinesToAdd)
     
-    $FileOriginal = Get-Content $FileName
+    $OriginalContents = Get-Content $FileName
     $hasBeenAdded = $false
-    [String[]] $FileModified = @() 
-    Foreach ($Line in $FileOriginal)
+    [String[]] $ModifiedContent = @() 
+    Foreach ($Line in $OriginalContents)
     {   
-        $FileModified += $Line
+        $ModifiedContent += $Line
         if ($Line.Trim() -eq $Pattern -and !$hasBeenAdded) 
         { 
-            $FileModified += $LinesToAdd   
+            $ModifiedContent += $LinesToAdd   
             $hasBeenAdded = $true;
-        } 
+        }
     }
-    Set-Content $fileName $FileModified -Force
+    $timestamp = Get-Date -Format o | ForEach-Object {$_ -replace ":", "."}
+
+    Set-Content "$FileName-$timestamp" $ModifiedContent -Force
+    Rename-Item -Path "$FileName-$timestamp" -NewName "$FileName" -Force
 }

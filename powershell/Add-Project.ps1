@@ -1,3 +1,5 @@
+#!/usr/bin/env pwsh
+
 param(
 [Parameter(Mandatory=$true)]
 [ValidateSet("project", "feature", "foundation")]
@@ -14,7 +16,6 @@ param(
 . $PSScriptRoot\Add-Line.ps1
 . $PSScriptRoot\Get-SolutionConfigurations.ps1
 . $PSScriptRoot\Get-SolutionFolderId.ps1
-. $PSScriptRoot\Get-ProjectPath.ps1 
 . $PSScriptRoot\Get-ProjectConfigurationPlatformSection.ps1
 . $PSScriptRoot\Add-BuildConfigurations.ps1
 
@@ -22,7 +23,7 @@ Write-Host "adding project $Name"
 
 $configurations = Get-SolutionConfigurations -SolutionFile $SolutionFile
 $solutionFolderId = Get-SolutionFolderId -SolutionFile $SolutionFile -Type $Type
-$projectPath = "$ProjectPath\$name.csproj" 
+$projectPath = "$ProjectPath/$name.csproj" 
 
 $GuidSection = "GlobalSection(ProjectConfigurationPlatforms) = postSolution"
 $ProjectSection = "MinimumVisualStudioVersion = 10.0.40219.1"
@@ -36,7 +37,7 @@ $addProjectSolutionFolder = @("Project(`"{2150E333-8FDC-42A3-9474-1A3956D46DE8}`
 $addNestProjectSection = @("`t`t{$projectGuid} = {$projectFolderGuid}")
 $addNestProjectSolutionFolderSection = @("`t`t{$projectFolderGuid} = $solutionFolderId")
 
-Add-BuildConfigurations -ProjectPath $projectPath -Configurations $configurations                
+Add-BuildConfigurations -ProjectPath $projectPath -Configurations $configurations
 Add-Line -FileName $SolutionFile -Pattern $ProjectSection -LinesToAdd $addProjectSection
 Add-Line -FileName $SolutionFile -Pattern $ProjectSection -LinesToAdd $addProjectSolutionFolder
 Add-Line -FileName $SolutionFile -Pattern $NestedProjectSection -LinesToAdd $addNestProjectSection
